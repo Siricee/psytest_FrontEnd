@@ -1,0 +1,123 @@
+{
+  "admin": [
+    {
+      "id": 5,
+      "username": "Shirley Wilson",
+      "password": "123",
+      "authority": 1
+    },
+    {
+      "id": 6,
+      "username": "Melissa Thomas",
+      "password": "123",
+      "authority": 1
+    },
+    {
+      "id": 7,
+      "username": "Timothy Rodriguez",
+      "password": "123",
+    },
+    {
+      "id": 8,
+      "username": "Anna Lewis",
+      "password": "123",
+      "authority": 1
+    },
+    {
+      "id": 9,
+      "username": "Anthony Harris",
+      "password": "123",
+      "authority": 1
+    },
+    {
+      "id": 10,
+      "username": "Robert Martinez",
+      "password": "123",
+      "authority": 1
+    },
+    {
+      "id": 11,
+      "username": "Mary Rodriguez",
+      "password": "123",
+      "authority": 1
+    },
+    {
+      "id": 12,
+      "username": "Edward Lopez",
+      "password": "123",
+      "authority": 1
+    }
+  ],
+  "user": [
+    {
+      "id": 5,
+      "username": "Paul Jones",
+      "password": "123",
+      "authority": 2,
+      "age": 15,
+      "sex": 2,
+      "work": "第三产业服务人员",
+      "location": "重庆市"
+    },
+    {
+      "id": 6,
+      "username": "Kenneth Walker",
+      "password": "123",
+      "authority": 2,
+      "age": 42,
+      "sex": 1,
+      "work": "从事农林牧渔业的劳动者",
+      "location": "西藏自治区"
+    },
+    {
+      "id": 7,
+      "username": "Mary Lee",
+      "password": "123",
+      "authority": 2,
+      "age": 22,
+      "sex": 1,
+      "work": "失业",
+      "location": "辽宁省"
+    },
+    {
+      "id": 8,
+      "username": "William Rodriguez",
+      "password": "123",
+      "authority": 2,
+      "age": 33,
+      "sex": 1,
+      "work": "职员（从事一般性事务工作的人员）",
+      "location": "辽宁省"
+    },
+    {
+      "id": 9,
+      "username": "Patricia Miller",
+      "password": "123",
+      "authority": 2,
+      "age": 19,
+      "sex": 2,
+      "work": "学生",
+      "location": "青海省"
+    },
+    {
+      "id": 10,
+      "username": "Brian Williams",
+      "password": "123",
+      "authority": 2,
+      "age": 47,
+      "sex": 2,
+      "work": "商务人员",
+      "location": "安徽省"
+    },
+    {
+      "id": 11,
+      "username": "Gary Miller",
+      "password": "123",
+      "authority": 2,
+      "age": 58,
+      "sex": 2,
+      "work": "专业技术人员（教师、医生、工程技术人员、作家等专业人员）",
+      "location": "甘肃省"
+    }
+  ]
+}

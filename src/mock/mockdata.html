@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!-- （必选）加载 Mock -->
+  <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <!-- （必选）加载 Mock -->
+  <script src="http://mockjs.com/dist/mock.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+  (function(){
+    var data = Mock.mock({
+      "admin|1-10":[{
+        "id|+1": 5,
+        "username": '@name',
+        "password|1": "123",
+        "authority": 1,
+      }],
+      "user|1-10":[
+        {
+          "id|+1": 5,
+          "username": '@name',
+          "password|1": "123",
+          "authority": 2,
+          "age|10-60": 10,
+          "sex|1-2": 2,
+          "work|1" : ["各级政府部门、企事业单位、党政机关和公众团体的领导者",
+                      "专业技术人员（教师、医生、工程技术人员、作家等专业人员）",
+                      "职员（从事一般性事务工作的人员）",
+                      "商务人员",
+                      "第三产业服务人员",
+                      "产业工人",
+                      "从事农林牧渔业的劳动者",
+                      "学生",
+                      "私营企业主",
+                      "失业",
+                      "离退休人员",
+                      "其他"],
+          "location|1": ["河北省","山西省","辽宁省","吉林省","黑龙江省","江苏省","浙江省","安徽省","福建省","江西省","山东省","河南省","湖北省","湖南省","广东省","海南省","四川省","贵州省","云南省","陕西省","甘肃省","青海省","台湾省","北京市","天津市","上海市","重庆市","内蒙古自治区","广西壮族自治区","宁夏回族自治区","新疆维吾尔自治区","西藏自治区","香港特别行政区","澳门特别行政区"]
+        }
+      ],
+
+    })
+
+    document.write(JSON.stringify(data, null, 4))
+    console.log(JSON.stringify(data, null, 4))
+
+  })();
+</script>
