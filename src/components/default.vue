@@ -1,5 +1,5 @@
 <template>
-  <p>默认模块</p>
+  <p>默认模块,这个模块放一个动画</p>
 </template>
 
 <script>
