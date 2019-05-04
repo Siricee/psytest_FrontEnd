@@ -30,9 +30,6 @@
           </el-card>
         </el-col>
 
-
-
-
         <el-col :span="11">
           <el-card class="box-card">
             <ve-radar :data="radarchartData" height="400px"></ve-radar>
@@ -118,7 +115,13 @@
 
 <script>
   import {getDass21historyListWithUserData, getUserDass21history} from "../../api/api";
-  import {formatWorkUtil, formatSexUtil, formatMarriageUtil, formatSalaryUtil} from "../../common/js/formatUtils";
+  import {
+    formatWorkUtil,
+    formatSexUtil,
+    formatMarriageUtil,
+    formatSalaryUtil,
+    dateFormatterUtil
+  } from "../../common/js/formatUtils";
 
   export default {
     name: "dass21history",
@@ -229,16 +232,8 @@
             resolve(tabledata); // 异步改为同步，此时数据获取完毕。
           }).then(res => {
             this.dass21history = res;
-
           });
-        }
-        ,
-
-        dateformatter: function (row, column) {
-          let timestamp = row.time;
-          return timestamp.toString().substr(0, 10) + " " + timestamp.toString().substr(11, 8);
-        }
-        ,
+        },
         // 带状态表格的行列标注：
         // :row-class-name渲染之后会变为class属性，接收的参数为字符串。
         // 因此可以根据条件进行拼接字符串，搭配子元素选择器可以实现单个元素的着色。
@@ -297,6 +292,11 @@
           getUserDass21history(data).then((res) => {
             this.userdass21history = res.data;
           })
+        }
+        ,
+        // 表格数据格式化
+        dateformatter: function (row, column) {
+          return dateFormatterUtil(row, column);
         }
         ,
         formatSex: function (row, colmun) {

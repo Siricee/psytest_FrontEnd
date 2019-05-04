@@ -1,13 +1,351 @@
 <template>
-  <p>novackhistory</p>
+  <section>
+    <div class="crumbs">
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item><i class="el-icon-time"></i> 历史记录</el-breadcrumb-item>
+        <el-breadcrumb-item>Novack历史记录</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
+    <section class="sextion-1">
+      <el-row :gutter="20">
+        <el-col :span="11">
+          <el-card class="box-card" style="overflow:auto">
+            <el-table :data="novackhistory" v-loading="listLoading" height="416" width="95%"
+                      :summary-method="calculateAverage"
+                      show-summary highlight-current-row
+                      border :row-class-name="tableRowName">
+              <el-table-column prop="id" label="序号" width="80" sortable></el-table-column>
+              <el-table-column prop="user.id" label="测试者ID" width="80"></el-table-column>
+              <el-table-column prop="time" label="测试时间" width="160" :formatter="dateformatter"
+                               sortable></el-table-column>
+              <el-table-column prop="sum" label="愤怒评分" sortable></el-table-column>
+              <el-table-column label="操作" width="100" fixed="right">
+                <template slot-scope="scope">
+                  <el-button size="small" type="text" @click="handleExamine(scope.$index, scope.row)">历史记录</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-card>
+        </el-col>
+
+        <el-col :span="11">
+          <el-card class="box-card">
+            <ve-radar :data="radarchartData" height="400px"></ve-radar>
+            <span>三项指标的雷达图</span>
+          </el-card>
+        </el-col>
+      </el-row>
+    </section>
+
+
+    <section class="section-2">
+      <el-row :gutter="20">
+
+
+        <el-col :span="11">
+          <el-card class="box-card">
+            <ve-pie :data="pieChartData" :settings="pieChartSettings"></ve-pie>
+            <span>有明显负面情绪倾向人群的性别、婚姻情况分布</span>
+          </el-card>
+        </el-col>
+
+        <el-col :span="11">
+          <el-card class="box-card">
+            <ve-histogram :data="histogramData"></ve-histogram>
+            <span>有负面情绪倾向人群的年龄统计</span>
+          </el-card>
+        </el-col>
+
+      </el-row>
+    </section>
+
+    <section class="section-3">
+      <el-row :gutter="20">
+        <el-col :span="11">
+          <el-card class="box-card">
+            <ve-ring :data="ringChartData"></ve-ring>
+            <span>有明显负面情绪倾向人群的收入分布</span>
+          </el-card>
+        </el-col>
+
+        <el-col :span="11">
+          <el-card class="box-card">
+            <ve-heatmap :data="heatMapChartData" :settings="heatMapChartSettings"></ve-heatmap>
+            <span>有明显负面情绪倾向人群的地区分布</span>
+          </el-card>
+        </el-col>
+      </el-row>
+    </section>
+
+
+    <!--    查看个人历史记录 对话弹框-->
+    <el-dialog title="历史记录" :visible.sync="ExamineDialogVisible" width="50%">
+
+      <p style="margin: 20px 0">用户名: {{username}} (ID:{{userId}}) 的历史记录</p>
+      <div class="userInfoTable" style="margin-bottom: 20px">
+        <el-table :data="userInfo" border width="100%">
+          <el-table-column prop="age" label="年龄" width="80"></el-table-column>
+          <el-table-column prop="sex" label="性别" :formatter="formatSex" width="80"></el-table-column>
+          <el-table-column prop="location" label="地区"></el-table-column>
+          <el-table-column prop="salary" label="薪资" :formatter="formatSalary" width="120"></el-table-column>
+          <el-table-column prop="work" label="从事行业" :formatter="formatWork"></el-table-column>
+          <el-table-column prop="marriage" label="是否已婚" :formatter="formatMarriage" width="80"></el-table-column>
+        </el-table>
+      </div>
+      <div style="text-align: center">
+        <el-table :data="usernovackhistory" max-height="300" border width="100%" v-loading="listLoading"
+                  :row-class-name="tableRowName">
+          <el-table-column prop="id" label="序号" width="80" sortable></el-table-column>
+          <el-table-column prop="userid" label="测试者ID" width="80"></el-table-column>
+          <el-table-column prop="time" label="测试时间" :formatter="dateformatter" sortable></el-table-column>
+          <el-table-column prop="sum" label="愤怒评分" sortable></el-table-column>
+        </el-table>
+      </div>
+      <span slot="footer" class="dialog-footer">
+      <el-button type="primary" @click="ExamineDialogVisible = false">关闭</el-button>
+      </span>
+    </el-dialog>
+
+  </section>
 </template>
 
 <script>
-    export default {
-        name: "novackhistory"
+  import {getNovackhistoryListWithUserData, getUserNovackhistory} from "../../api/api";
+  import {
+    formatWorkUtil,
+    formatSexUtil,
+    formatMarriageUtil,
+    formatSalaryUtil,
+    dateFormatterUtil
+  } from "../../common/js/formatUtils";
+
+  export default {
+    name: "novackhistory",
+    data() {
+      // 双环饼图
+      this.pieChartSettings = {
+        level: [
+          ['男', '女',],
+          ['已婚', '未婚']
+        ]
+      };
+      // 热力图
+      this.heatMapChartSettings = {
+        position: 'china',
+        type: 'map',
+        geo: {
+          label: {
+            emphasis: {
+              show: false
+            }
+          },
+          itemStyle: {
+            normal: {
+              areaColor: '#323c48',
+              borderColor: '#111'
+            },
+            emphasis: {
+              areaColor: '#2a333d'
+            }
+          }
+        }
+      };
+      return {
+        // dialog
+        username: '',
+        userId: '',
+        ExamineDialogVisible: false,
+        usernovackhistory: [],
+        userInfo: [],
+        // table
+        listLoading: false,
+        novackhistory: [],
+        // graph
+        ringChartData: {
+          columns: ['收入情况', '人数'],
+          rows: [
+            {'收入情况': '1000元以下', '人数': 1393},
+            {'收入情况': '1000-1999元', '人数': 3530},
+            {'收入情况': '2000-3999元', '人数': 2923},
+            {'收入情况': '4000-5999元', '人数': 1723},
+            {'收入情况': '6000-9999元', '人数': 3792},
+            {'收入情况': '10000-19999元', '人数': 4593}
+          ]
+        },
+        histogramData: {
+          columns: ['年龄', '抑郁', '焦虑', '压力'],
+          rows: [
+            {'年龄': '20-30', '抑郁': 1393, '焦虑': 1093, '压力': 1099},
+            {'年龄': '30-40', '抑郁': 3530, '焦虑': 3230, '压力': 2088},
+            {'年龄': '40-50', '抑郁': 2923, '焦虑': 2623, '压力': 2033},
+            {'年龄': '50-70', '抑郁': 1723, '焦虑': 1423, '压力': 1534},
+            {'年龄': '70+', '抑郁': 3792, '焦虑': 3492, '压力': 400},
+          ]
+        },
+        radarchartData: {
+          columns: ['类别', '焦虑', '抑郁', '压力'],
+          rows: [
+            {'类别': '测试用户平均值', '焦虑': 21.017, '抑郁': 21.380, '压力': 20.812},
+            {'类别': '常模', '焦虑': 12, '抑郁': 14, '压力': 13},
+            {'类别': '正常值', '焦虑': 7, '抑郁': 9, '压力': 14},
+          ]
+        },
+        pieChartData: {
+          columns: ['人群', '负面情绪倾向人数'],
+          rows: [
+            {'人群': '男', '负面情绪倾向人数': 393},
+            {'人群': '女', '负面情绪倾向人数': 530},
+            {'人群': '已婚', '负面情绪倾向人数': 240},
+            {'人群': '未婚', '负面情绪倾向人数': 350},
+          ]
+        },
+        heatMapChartData: {
+          columns: ['lat', 'lng', '人数'],
+          rows: [
+            {'lat': 115.892151, 'lng': 28.676493, '人数': 1000},
+            {'lat': 117.000923, 'lng': 36.675807, '人数': 400},
+            {'lat': 113.665412, 'lng': 34.757975, '人数': 800},
+            {'lat': 114.298572, 'lng': 30.584355, '人数': 200},
+            {'lat': 112.982279, 'lng': 28.19409, '人数': 100},
+            {'lat': 113.280637, 'lng': 23.125178, '人数': 300},
+            {'lat': 110.33119, 'lng': 20.031971, '人数': 800},
+            {'lat': 104.065735, 'lng': 30.659462, '人数': 700},
+            {'lat': 108.948024, 'lng': 34.263161, '人数': 300},
+            {'lat': 103.823557, 'lng': 36.058039, '人数': 500}
+          ]
+        },
+      }
+    },
+    methods:
+      {
+        // 表格数据：
+        // 此处应该为全局数据。
+        getData() {
+          new Promise((resolve, reject) => {
+            let tabledata = getNovackhistoryListWithUserData().then((res) => {
+              return res.data
+            });
+            resolve(tabledata); // 异步改为同步，此时数据获取完毕。
+          }).then(res => {
+            this.novackhistory = res;
+          });
+        },
+        // 带状态表格的行列标注：
+        // :row-class-name渲染之后会变为class属性，接收的参数为字符串。
+        // 因此可以根据条件进行拼接字符串，搭配子元素选择器可以实现单个元素的着色。
+        tableRowName({row, rowIndex}) {
+          let str = '';
+          if (parseInt(row.sum) <= 45) {
+            str += 'safe-novack-row';
+          } else if (parseInt(row.sum) > 45 && parseInt(row.sum) <= 55) {
+            str += 'light-novack-row';
+          } else if (parseInt(row.sum) > 55 && parseInt(row.sum) <= 75) {
+            str += 'medium-novack-row';
+          } else if (parseInt(row.sum) > 75&& parseInt(row.sum) <= 85) {
+            str += 'more-novack-row';
+          }else if (parseInt(row.sum) > 85) {
+            str += 'warning-novack-row';
+          }
+          return str;
+        }
+        ,
+        // 表格平均值计算方法
+        calculateAverage(param) {
+          const {columns, data} = param;
+          const sums = [];
+          columns.forEach((column, index) => {
+            if (index === 0) {
+              sums[index] = '平均值';
+              return;
+            }
+            const values = data.map(item => Number(item[column.property]));
+            if (!values.every(value => isNaN(value))) {
+              sums[index] = values.reduce((prev, curr) => {
+                const value = Number(curr);
+                if (!isNaN(value)) {
+                  return prev + curr;
+                } else {
+                  return prev;
+                }
+              }, 0);
+              sums[index] = (sums[index] / data.length).toFixed(3);
+            } else {
+              sums[index] = '--';
+            }
+          });
+          return sums;
+        }
+        ,
+        // 表格按钮事件
+        handleExamine: function (index, row) {
+          this.ExamineDialogVisible = true;
+          this.username = row.user.username;
+          this.userId = row.user.id;
+          let arr = [];
+          arr.push(row.user);
+          this.userInfo = arr;
+          // console.log(row);
+          let data = {userid: parseInt(row.user.id)};
+
+          getUserNovackhistory(data).then((res) => {
+            this.usernovackhistory = res.data;
+          })
+        }
+        ,
+        // 表格数据格式化
+        dateformatter: function (row, column) {
+          return dateFormatterUtil(row, column);
+        }
+        ,
+        formatSex: function (row, colmun) {
+          return formatSexUtil(row, colmun);
+        }
+        ,
+        formatSalary: function (row, colmun) {
+          return formatSalaryUtil(row, colmun);
+        }
+        ,
+        formatMarriage: function (row, colmun) {
+          return formatMarriageUtil(row, colmun);
+        }
+        ,
+        formatWork: function (row, colmun) {
+          return formatWorkUtil(row, colmun);
+        }
+        ,
+
+      }
+    ,
+    mounted() {
+      this.getData();
     }
+  }
 </script>
 
 <style scoped>
+
+</style>
+<style>
+  .el-table .safe-novack-row td:nth-child(4) {
+    color: #2db7f5;
+  }
+  .el-table .light-novack-row td:nth-child(4) {
+    color: #11b95c;
+  }
+  .el-table .medium-novack-row td:nth-child(4) {
+    color: #f7ba2a;
+  }
+
+  .el-table .more-novack-row td:nth-child(4) {
+    color: #FF99AD;
+  }
+
+  .el-table .warning-novack-row td:nth-child(4) {
+    color: red;
+  }
+
+  .el-card {
+    margin-bottom: 20px;
+  }
 
 </style>

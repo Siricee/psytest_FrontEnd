@@ -44,3 +44,7 @@ export const formatSalaryUtil = function(row,column){
     default:return;
   }
 };
+export const dateFormatterUtil = function (row, column) {
+  let timestamp = row.time;
+  return timestamp.toString().substr(0, 10) + " " + timestamp.toString().substr(11, 8);
+};

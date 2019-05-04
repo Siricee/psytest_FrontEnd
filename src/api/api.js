@@ -21,7 +21,22 @@ export const commitSasPaper = params => { return Axios.post(`${base}/sas/commit`
 export const commitScl90Paper = params => { return Axios.post(`${base}/scl90/commit`, qs.stringify(params)); };
 
 // 获取历史记录
-export const getDass21historyList = params => { return Axios.get(`${base}/dass21/history_list`, qs.stringify(params)); };
+
+// dass21 问卷
+//export const getDass21historyList = params => { return Axios.get(`${base}/dass21/history_list`, qs.stringify(params)); };
 export const getDass21historyListWithUserData = params => { return Axios.get(`${base}/dass21/history_list_detail`, qs.stringify(params)); };
- // 注意：get请求不用qs序列化，直接传json就可以
+    // 注意：get请求不用qs序列化，直接传json就可以
 export const getUserDass21history = params => { return Axios.get(`${base}/dass21/history_list/user`, {params:params} )};
+
+// SAS 问卷
+//export const getSAShistoryList = params => { return Axios.get(`${base}/sas/history_list`, qs.stringify(params)); };
+export const getSAShistoryListWithUserData = params => { return Axios.get(`${base}/sas/history_list_detail`, qs.stringify(params)); };
+export const getUserSAShistory = params => { return Axios.get(`${base}/sas/history_list/user`, {params:params} )};
+
+// Novack 问卷
+export const getNovackhistoryListWithUserData = params => { return Axios.get(`${base}/novack/history_list_detail`, qs.stringify(params)); };
+export const getUserNovackhistory = params => { return Axios.get(`${base}/novack/history_list/user`, {params:params} )};
+
+// SCL90问卷
+export const getScl90historyListWithUserData = params => { return Axios.get(`${base}/scl90/history_list_detail`, qs.stringify(params)); };
+export const getUserScl90history = params => { return Axios.get(`${base}/scl90/history_list/user`, {params:params} )};
