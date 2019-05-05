@@ -48,6 +48,7 @@
         color: #fff;
     }
     .header .logo{
+      font-size: 20px;
         float: left;
         width:250px;
         text-align: center;

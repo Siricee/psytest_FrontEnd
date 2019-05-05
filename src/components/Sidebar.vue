@@ -32,6 +32,9 @@
               index: 'user-register',
               title: '用户注册'
             }, {
+              index: 'admin-info',
+              title: '分析人员信息管理'
+            },{
               index: 'user-info',
               title: '用户信息管理'
             }]
@@ -98,10 +101,7 @@
               }, {
                 index: 'dass21-history',
                 title: 'DASS21量表记录'
-              },{
-                index: 'data',
-                title:'没想好怎么统计'
-              }
+              },
             ]
           },
         ]

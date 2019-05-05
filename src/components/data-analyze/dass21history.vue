@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="dass21history">
     <div class="crumbs">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item><i class="el-icon-time"></i> 历史记录</el-breadcrumb-item>
@@ -162,7 +162,7 @@
         userdass21history: [],
         userInfo: [],
         // table
-        listLoading: false,
+        listLoading: true,
         dass21history: [],
         // graph
         ringChartData: {
@@ -232,6 +232,7 @@
             resolve(tabledata); // 异步改为同步，此时数据获取完毕。
           }).then(res => {
             this.dass21history = res;
+            this.listLoading = false;
           });
         },
         // 带状态表格的行列标注：
@@ -328,9 +329,9 @@
 
 </style>
 <style>
-  .el-table .warning-depression-row td:nth-child(4),
-  .el-table .warning-anxiety-row td:nth-child(5),
-  .el-table .warning-stress-row td:nth-child(6) {
+  .dass21history .el-table .warning-depression-row td:nth-child(4),
+  .dass21history .el-table .warning-anxiety-row td:nth-child(5),
+  .dass21history .el-table .warning-stress-row td:nth-child(6) {
     color: red;
   }
 

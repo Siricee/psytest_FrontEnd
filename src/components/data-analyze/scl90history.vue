@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="scl90history">
     <div class="crumbs">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item><i class="el-icon-time"></i> 历史记录</el-breadcrumb-item>
@@ -15,7 +15,7 @@
                       show-summary highlight-current-row
                       border :row-class-name="tableRowName">
               <el-table-column prop="id" label="序号" width="80" sortable></el-table-column>
-              <el-table-column prop="user.id" label="测试者ID" width="80"></el-table-column>
+              <el-table-column prop="user.id" label="测试者ID" width="80" sortable></el-table-column>
               <el-table-column prop="time" label="测试时间" width="160" :formatter="dateformatter"
                                sortable></el-table-column>
               <el-table-column prop="sumscore" label="总评分" width="90" sortable></el-table-column>
@@ -43,7 +43,7 @@
         <el-col :span="11">
           <el-card class="box-card">
             <ve-radar :data="radarchartData" :settings="radarChartSettings" height="400px"></ve-radar>
-            <span>三项指标的雷达图</span>
+            <span>9种症状评分雷达图</span>
           </el-card>
         </el-col>
       </el-row>
@@ -185,7 +185,7 @@
         userscl90history: [],
         userInfo: [],
         // table
-        listLoading: false,
+        listLoading: true,
         scl90history: [],
         // graph
         ringChartData: {
@@ -255,6 +255,7 @@
             resolve(tabledata); // 异步改为同步，此时数据获取完毕。
           }).then(res => {
             this.scl90history = res;
+            this.listLoading = false;
           });
         },
         // 带状态表格的行列标注：
@@ -372,16 +373,16 @@
 
 </style>
 <style>
-  .el-table .warning-sum-row td:nth-child(4),
-  .el-table .warning-somatization-row td:nth-child(7),
-  .el-table .warning-obsessive-row td:nth-child(8),
-  .el-table .warning-interpersonal-row td:nth-child(9),
-  .el-table .warning-depression-row td:nth-child(10),
-  .el-table .warning-anxiety-row td:nth-child(11),
-  .el-table .warning-hostility-row td:nth-child(12),
-  .el-table .warning-phobic-row td:nth-child(13),
-  .el-table .warning-paranoid-row td:nth-child(14),
-  .el-table .warning-psychoticism-row td:nth-child(15) {
+  .scl90history .el-table .warning-sum-row td:nth-child(4),
+  .scl90history .el-table .warning-somatization-row td:nth-child(7),
+  .scl90history .el-table .warning-obsessive-row td:nth-child(8),
+  .scl90history .el-table .warning-interpersonal-row td:nth-child(9),
+  .scl90history .el-table .warning-depression-row td:nth-child(10),
+  .scl90history .el-table .warning-anxiety-row td:nth-child(11),
+  .scl90history .el-table .warning-hostility-row td:nth-child(12),
+  .scl90history .el-table .warning-phobic-row td:nth-child(13),
+  .scl90history .el-table .warning-paranoid-row td:nth-child(14),
+  .scl90history .el-table .warning-psychoticism-row td:nth-child(15) {
     color: #e64242;
   }
 

@@ -10,10 +10,12 @@ import defaultModule from '../components/default'
 // 组件注册
 Vue.use(Router);
 
-// 子模块，懒加载
+// 懒加载
+
+// 用户管理模块
 const Register = resolve => require(['../components/user-manage/register'],resolve);
-const Error = resolve => require(['../components/Error'],resolve);
 const userTable = resolve => require(['../components/user-manage/userTable'],resolve);
+const adminTable = resolve => require(['../components/user-manage/adminTable'],resolve);
 // 问卷模块
 const scl90paper = resolve => require(['../components/papers/scl90paper'],resolve);
 const saspaper = resolve => require(['../components/papers/saspaper'],resolve);
@@ -29,6 +31,10 @@ const personalscl90history = resolve => require(['../components/personalresult/p
 const personalsashistory = resolve => require(['../components/personalresult/personalsashistory.vue'],resolve);
 const personaldass21history = resolve => require(['../components/personalresult/personaldass21history.vue'],resolve);
 const personalnovackhistory = resolve => require(['../components/personalresult/personalnovackhistory.vue'],resolve);
+// 错误url的默认路由
+const Error = resolve => require(['../components/Error'],resolve);
+
+
 // 路由地址配置
 export default new Router({
   routes: [
@@ -44,6 +50,9 @@ export default new Router({
       },{
         path: '/user-register',
         component: Register
+      },{
+        path:'/admin-info',
+        component: adminTable
       },{
         path:'/user-info',
         component: userTable

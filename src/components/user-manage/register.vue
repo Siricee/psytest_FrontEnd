@@ -190,9 +190,6 @@
       }
 
     },
-    created() {
-
-    },
     methods: {
       handleChange(value) {
         // change 事件触发赋值

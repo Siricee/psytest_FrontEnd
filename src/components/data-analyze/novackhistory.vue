@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="novackhistory">
     <div class="crumbs">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item><i class="el-icon-time"></i> 历史记录</el-breadcrumb-item>
@@ -158,7 +158,7 @@
         usernovackhistory: [],
         userInfo: [],
         // table
-        listLoading: false,
+        listLoading: true,
         novackhistory: [],
         // graph
         ringChartData: {
@@ -228,6 +228,7 @@
             resolve(tabledata); // 异步改为同步，此时数据获取完毕。
           }).then(res => {
             this.novackhistory = res;
+            this.listLoading= false;
           });
         },
         // 带状态表格的行列标注：
@@ -322,27 +323,27 @@
   }
 </script>
 
-<style scoped>
-
-</style>
 <style>
-  .el-table .safe-novack-row td:nth-child(4) {
+  .novackhistory .el-table .safe-novack-row td:nth-child(4) {
     color: #2db7f5;
   }
-  .el-table .light-novack-row td:nth-child(4) {
+  .novackhistory .el-table .light-novack-row td:nth-child(4) {
     color: #11b95c;
   }
-  .el-table .medium-novack-row td:nth-child(4) {
+  .novackhistory .el-table .medium-novack-row td:nth-child(4) {
     color: #f7ba2a;
   }
 
-  .el-table .more-novack-row td:nth-child(4) {
+  .novackhistory .el-table .more-novack-row td:nth-child(4) {
     color: #FF99AD;
   }
 
-  .el-table .warning-novack-row td:nth-child(4) {
+  .novackhistory .el-table .warning-novack-row td:nth-child(4) {
     color: red;
   }
+</style>
+<style>
+
 
   .el-card {
     margin-bottom: 20px;
