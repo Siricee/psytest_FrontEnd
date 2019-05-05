@@ -6,8 +6,8 @@ import router from './router'
 import ElementUI from 'element-ui'
 import VCharts from 'v-charts'
 
-import "../static/css/main.css";
-import "../static/css/color-dark.css";
+import "./common/css/main.css";
+import "./common/css/color-dark.css";
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI);
 Vue.use(VCharts);
