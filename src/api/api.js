@@ -1,6 +1,8 @@
 import Axios from 'axios';
 import qs from 'qs'; // qs 是参数经过处理将对象处理为url。
-let base = '/api';
+
+let base = process.env.NODE_ENV === 'production' ?'.':'/api';
+
 
 // admin
 export const adminLogin = params => { return Axios.post(`${base}/admin/login`, qs.stringify(params)); };
