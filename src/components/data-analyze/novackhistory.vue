@@ -343,10 +343,7 @@
   }
 </style>
 <style>
-
-
   .el-card {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
-
 </style>

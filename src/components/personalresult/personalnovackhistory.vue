@@ -188,7 +188,7 @@
 
 <style lang="css">
   section {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   .personalnovackhistory .el-table .safe-novack-row td:nth-child(3) {

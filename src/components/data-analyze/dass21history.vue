@@ -326,17 +326,15 @@
 </script>
 
 <style scoped>
-
+  .el-card {
+    margin-bottom: 10px;
+  }
 </style>
 <style>
   .dass21history .el-table .warning-depression-row td:nth-child(4),
   .dass21history .el-table .warning-anxiety-row td:nth-child(5),
   .dass21history .el-table .warning-stress-row td:nth-child(6) {
     color: red;
-  }
-
-  .el-card {
-    margin-bottom: 20px;
   }
 
 </style>

@@ -46,6 +46,7 @@
         font-size: 22px;
         line-height: 70px;
         color: #fff;
+        background-color: #4081c3ed;
     }
     .header .logo{
       font-size: 20px;

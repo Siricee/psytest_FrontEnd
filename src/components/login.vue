@@ -1,46 +1,54 @@
 <template>
   <div class="continer">
-    <el-row type="flex" class="row-bg" justify="center">
-      <el-col :span="6">
-        <el-card class="box-card">
-          <el-form :model="loginForm">
-            <el-form-item>
-              <el-input placeholder="请输入用户名" v-model="loginForm.username" clearable>
-                <template slot="prepend" class="prependDiv">用户名</template>
-              </el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-input placeholder="请输入密码" v-model="loginForm.password" show-password>
-                <template slot="prepend" class="prependDiv">密&nbsp;&nbsp;&nbsp;码</template>
-              </el-input>
-            </el-form-item>
-          </el-form>
-          <el-row>
-            <el-col :span="8">
-              <el-button class="btn login_btn" type="primary" icon="el-icon-circle-check-outline" @click.native="login"
-                         plain>登录
-              </el-button>
-            </el-col>
-            <el-col :span="8">
-              <el-button class="btn login_btn" type="primary" icon="el-icon-setting" @click.native="adminlogin"
-                         plain>管理
-              </el-button>
-            </el-col>
-            <el-col :span="8">
-              <el-button class="btn register_btn" type="info" icon="el-icon-circle-plus-outline"
-                         @click.native="register" plain>注册
-              </el-button>
-            </el-col>
-          </el-row>
+    <div class="login-solgan">
+      <el-row>
+        <span>心理测评数据分析系统</span>
+      </el-row>
+    </div>
+    <div class="login-form">
+      <el-row type="flex" class="row-bg" justify="center">
+        <el-col :span="6">
+          <el-card class="box-card">
+            <el-form :model="loginForm">
+              <el-form-item>
+                <el-input placeholder="请输入用户名" v-model="loginForm.username" clearable>
+                  <template slot="prepend" class="prependDiv">用户名</template>
+                </el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-input placeholder="请输入密码" v-model="loginForm.password" show-password>
+                  <template slot="prepend" class="prependDiv">密&nbsp;&nbsp;&nbsp;码</template>
+                </el-input>
+              </el-form-item>
+            </el-form>
+            <el-row>
+              <el-col :span="8">
+                <el-button class="btn login_btn" type="primary" icon="el-icon-circle-check-outline"
+                           @click.native="login"
+                           plain>登录
+                </el-button>
+              </el-col>
+              <el-col :span="8">
+                <el-button class="btn login_btn" type="primary" icon="el-icon-setting" @click.native="adminlogin"
+                           plain>管理
+                </el-button>
+              </el-col>
+              <el-col :span="8">
+                <el-button class="btn register_btn" type="info" icon="el-icon-circle-plus-outline"
+                           @click.native="register" plain>注册
+                </el-button>
+              </el-col>
+            </el-row>
 
-        </el-card>
-      </el-col>
-    </el-row>
+          </el-card>
+        </el-col>
+      </el-row>
+    </div>
   </div>
 </template>
 
 <script>
-  import {userLogin,adminLogin} from "../api/api";
+  import {userLogin, adminLogin} from "../api/api";
   import qs from 'qs';
 
   const axios = require('axios');
@@ -154,7 +162,7 @@
         }
       },
       register() {
-        console.log("click register")
+        this.$router.push('/user-register');
       }
     }
 
@@ -163,12 +171,29 @@
 </script>
 
 <style scoped>
-  .row-bg {
-    margin-bottom: 20px;
-  }
 
   .continer {
-    padding-top: 15%;
+    height: 100%;
+    width: 100%;
+    background-image: url("../asserts/background.jpg");
+    background-size: 100% auto;
+  }
+  .login-solgan{
+    position: relative;
+    top: 30%;
+    font-family: '幼圆','微软雅黑','Segoe UI Black';
+    color: #fff;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  .login-form {
+    position: relative;
+    top: 40%;
+  }
+
+  .row-bg {
+    margin-bottom: 20px;
   }
 
   .box-card {
