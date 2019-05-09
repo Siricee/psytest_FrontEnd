@@ -7,7 +7,7 @@
       </el-breadcrumb>
     </div>
     <section class="sextion-1">
-      <el-row :gutter="20">
+      <el-row :gutter="10">
         <el-col :span="11">
           <el-card class="box-card" style="overflow:auto">
             <el-table :data="dass21history" v-loading="listLoading" height="416" width="95%"
@@ -41,7 +41,7 @@
 
 
     <section class="section-2">
-      <el-row :gutter="20">
+      <el-row :gutter="10">
 
 
         <el-col :span="11">
@@ -62,7 +62,7 @@
     </section>
 
     <section class="section-3">
-      <el-row :gutter="20">
+      <el-row :gutter="10">
         <el-col :span="11">
           <el-card class="box-card">
             <ve-ring :data="ringChartData"></ve-ring>

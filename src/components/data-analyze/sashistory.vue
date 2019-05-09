@@ -7,7 +7,7 @@
       </el-breadcrumb>
     </div>
     <section class="sextion-1">
-      <el-row :gutter="20">
+      <el-row :gutter="10">
         <el-col :span="11">
           <el-card class="box-card" style="overflow:auto">
             <el-table :data="sashistory" v-loading="listLoading" height="416" width="95%"
@@ -30,15 +30,15 @@
 
         <el-col :span="11">
           <el-card class="box-card">
-            <ve-radar :data="radarchartData" height="400px"></ve-radar>
-            <span>三项指标的雷达图</span>
+            <ve-gauge :data="gaugeChartData" :settings="gaugeChartSettings"></ve-gauge>
+            <span>平均焦虑评分的仪表图</span>
           </el-card>
         </el-col>
       </el-row>
     </section>
 
     <section class="section-2">
-      <el-row :gutter="20">
+      <el-row :gutter="10">
 
 
         <el-col :span="11">
@@ -59,7 +59,7 @@
     </section>
 
     <section class="section-3">
-      <el-row :gutter="20">
+      <el-row :gutter="10">
         <el-col :span="11">
           <el-card class="box-card">
             <ve-ring :data="ringChartData"></ve-ring>
@@ -121,6 +121,27 @@
   export default {
     name: "sashistory",
     data() {
+      // 仪表盘
+      this.gaugeChartSettings = {
+        dataName:{
+          'score':'焦虑评分'
+        },
+        seriesMap:{
+          'score':{
+            min:0,
+            max:100,
+            splitNumber:10,
+            axisLine:{
+              lineStyle:{
+                color: [[0.5, '#2B91D5'],[0.6,'#55AA77'], [0.7, '#AAAA55'], [1, '#c23531']],
+                width: 30,
+                shadowColor: '#fff',
+                shadowBlur: 10
+              }
+            }
+          }
+        }
+      };
       // 双环饼图
       this.pieChartSettings = {
         level: [
@@ -181,12 +202,11 @@
             {'年龄': '70+', '抑郁': 3792, '焦虑': 3492, '压力': 400},
           ]
         },
-        radarchartData: {
-          columns: ['类别', '焦虑', '抑郁', '压力'],
+
+        gaugeChartData: {
+          columns: ['type', 'value'],
           rows: [
-            {'类别': '测试用户平均值', '焦虑': 21.017, '抑郁': 21.380, '压力': 20.812},
-            {'类别': '常模', '焦虑': 12, '抑郁': 14, '压力': 13},
-            {'类别': '正常值', '焦虑': 7, '抑郁': 9, '压力': 14},
+            { type: 'score', value:54, }
           ]
         },
         pieChartData: {

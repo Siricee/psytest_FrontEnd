@@ -180,7 +180,7 @@
   }
   .login-solgan{
     position: relative;
-    top: 30%;
+    top: 25%;
     font-family: '幼圆','微软雅黑','Segoe UI Black';
     color: #fff;
     font-size: 3rem;
@@ -189,7 +189,7 @@
 
   .login-form {
     position: relative;
-    top: 40%;
+    top: 35%;
   }
 
   .row-bg {
