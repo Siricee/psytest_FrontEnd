@@ -125,7 +125,7 @@
       // 仪表盘
       this.gaugeChartSettings = {
         dataName:{
-          'score':'焦虑评分'
+          'score':'愤怒评分'
         },
         seriesMap:{
           'score':{
@@ -185,37 +185,37 @@
         ringChartData: {
           columns: ['收入情况', '人数'],
           rows: [
-            {'收入情况': '1000元以下', '人数': 1393},
-            {'收入情况': '1000-1999元', '人数': 3530},
-            {'收入情况': '2000-3999元', '人数': 2923},
-            {'收入情况': '4000-5999元', '人数': 1723},
-            {'收入情况': '6000-9999元', '人数': 3792},
-            {'收入情况': '10000-19999元', '人数': 4593}
+            // {'收入情况': '1000元以下', '人数': 1393},
+            // {'收入情况': '1000-1999元', '人数': 3530},
+            // {'收入情况': '2000-3999元', '人数': 2923},
+            // {'收入情况': '4000-5999元', '人数': 1723},
+            // {'收入情况': '6000-9999元', '人数': 3792},
+            // {'收入情况': '10000-19999元', '人数': 4593}
           ]
         },
         histogramData: {
-          columns: ['年龄', '抑郁', '焦虑', '压力'],
+          columns: ['年龄', '愤怒',],
           rows: [
-            {'年龄': '20-30', '抑郁': 1393, '焦虑': 1093, '压力': 1099},
-            {'年龄': '30-40', '抑郁': 3530, '焦虑': 3230, '压力': 2088},
-            {'年龄': '40-50', '抑郁': 2923, '焦虑': 2623, '压力': 2033},
-            {'年龄': '50-70', '抑郁': 1723, '焦虑': 1423, '压力': 1534},
-            {'年龄': '70+', '抑郁': 3792, '焦虑': 3492, '压力': 400},
+            // {'年龄': '20-30', '抑郁': 1393, },
+            // {'年龄': '30-40', '抑郁': 3530, },
+            // {'年龄': '40-50', '抑郁': 2923, },
+            // {'年龄': '50-70', '抑郁': 1723, },
+            // {'年龄': '70+', '抑郁': 3792, },
           ]
         },
         gaugeChartData: {
           columns: ['type', 'value'],
           rows: [
-            { type: 'score', value:49, }
+            // { type: 'score', value:49, }
           ]
         },
         pieChartData: {
           columns: ['人群', '负面情绪倾向人数'],
           rows: [
-            {'人群': '男', '负面情绪倾向人数': 393},
-            {'人群': '女', '负面情绪倾向人数': 530},
-            {'人群': '已婚', '负面情绪倾向人数': 240},
-            {'人群': '未婚', '负面情绪倾向人数': 350},
+            // {'人群': '男', '负面情绪倾向人数': 393},
+            // {'人群': '女', '负面情绪倾向人数': 530},
+            // {'人群': '已婚', '负面情绪倾向人数': 240},
+            // {'人群': '未婚', '负面情绪倾向人数': 350},
           ]
         },
         heatMapChartData: {
@@ -248,6 +248,105 @@
           }).then(res => {
             this.novackhistory = res;
             this.listLoading= false;
+            // 仪表盘变量
+            let angry_avg = 0;
+            // 饼图变量
+            let male = 0;
+            let female = 0;
+            let marriaged = 0;
+            let unmamarriaged = 0;
+            // 环图变量
+            let salary_num_1 = 0, salary_num_2 = 0, salary_num_3 = 0, salary_num_4 = 0, salary_num_5 = 0,
+              salary_num_6 = 0, salary_num_7 = 0;
+
+            let angry_20_30 = 0;
+            let angry_30_40 = 0;
+            let angry_40_50 = 0;
+            let angry_50_70 = 0;
+            let angry_70more = 0;
+            for (let data of res) {
+              // 仪表盘
+              angry_avg += parseInt(data.sum);
+              // 饼图
+              if (parseInt(data.sum) > 55) {
+                parseInt(data.user.sex) === 1 ? male += 1 : female += 1;
+                parseInt(data.user.marriage) === 1 ? marriaged += 1 : unmamarriaged += 1;
+                // 环图
+                switch (parseInt(data.user.salary)) {
+                  case 1:
+                    salary_num_1 += 1;
+                    break;
+                  case 2:
+                    salary_num_2 += 1;
+                    break;
+                  case 3:
+                    salary_num_3 += 1;
+                    break;
+                  case 4:
+                    salary_num_4 += 1;
+                    break;
+                  case 5:
+                    salary_num_5 += 1;
+                    break;
+                  case 6:
+                    salary_num_6 += 1;
+                    break;
+                  case 7:
+                    salary_num_7 += 1;
+                    break;
+                }
+                // 条形图
+                if (parseInt(data.user.age) >= 20 && parseInt(data.user.age) < 30) {
+                  angry_20_30 += 1;
+                } else if (parseInt(data.user.age) >= 30 && parseInt(data.user.age) < 40) {
+                  angry_30_40 += 1;
+                } else if (parseInt(data.user.age) >= 40 && parseInt(data.user.age) < 50) {
+                  angry_40_50 += 1;
+                } else if (parseInt(data.user.age) >= 50 && parseInt(data.user.age) < 70) {
+                  angry_50_70 += 1;
+                } else if (parseInt(data.user.age) >= 70) {
+                  angry_70more += 1;
+                }
+              }
+            }
+            // 仪表盘
+            angry_avg = Math.round(angry_avg/res.length);
+            let obj = { type: 'score', value: angry_avg };
+            this.gaugeChartData.rows.push(obj);
+
+            // 饼图
+            let pieArray = [
+              {'人群': '男', '负面情绪倾向人数': male},
+              {'人群': '女', '负面情绪倾向人数': female},
+              {'人群': '已婚', '负面情绪倾向人数': marriaged},
+              {'人群': '未婚', '负面情绪倾向人数': unmamarriaged},
+            ];
+            for (let i of pieArray) {
+              this.pieChartData.rows.push(i);
+            }
+            // 环图
+            let ringArray = [
+              {'收入情况': '1000元以下', '人数': salary_num_1},
+              {'收入情况': '1000-1999元', '人数': salary_num_2},
+              {'收入情况': '2000-3999元', '人数': salary_num_3},
+              {'收入情况': '4000-5999元', '人数': salary_num_4},
+              {'收入情况': '6000-9999元', '人数': salary_num_5},
+              {'收入情况': '10000-19999元', '人数': salary_num_6},
+              {'收入情况': '200000元以上', '人数': salary_num_7}
+            ];
+            for (let i of ringArray) {
+              this.ringChartData.rows.push(i);
+            }
+            // 条形图
+            let histoArray = [{'年龄': '20-30', '愤怒': angry_20_30, },
+              {'年龄': '30-40', '愤怒': angry_30_40, },
+              {'年龄': '40-50', '愤怒': angry_40_50, },
+              {'年龄': '50-70', '愤怒': angry_50_70, },
+              {'年龄': '70+', '愤怒': angry_70more, },]
+            for (let i of histoArray) {
+              this.histogramData.rows.push(i);
+            }
+
           });
         },
         // 带状态表格的行列标注：

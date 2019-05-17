@@ -146,7 +146,7 @@
     data() {
       // 雷达图
       this.radarChartSettings = {
-        metrics: ['F1','F2','F3','F4','F5','F6','F7','F8','F9',],
+        metrics: ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9',],
       };
       // 双环饼图
       this.pieChartSettings = {
@@ -191,39 +191,105 @@
         ringChartData: {
           columns: ['收入情况', '人数'],
           rows: [
-            {'收入情况': '1000元以下', '人数': 1393},
-            {'收入情况': '1000-1999元', '人数': 3530},
-            {'收入情况': '2000-3999元', '人数': 2923},
-            {'收入情况': '4000-5999元', '人数': 1723},
-            {'收入情况': '6000-9999元', '人数': 3792},
-            {'收入情况': '10000-19999元', '人数': 4593}
+            // {'收入情况': '1000元以下', '人数': 1393},
+            // {'收入情况': '1000-1999元', '人数': 3530},
+            // {'收入情况': '2000-3999元', '人数': 2923},
+            // {'收入情况': '4000-5999元', '人数': 1723},
+            // {'收入情况': '6000-9999元', '人数': 3792},
+            // {'收入情况': '10000-19999元', '人数': 4593}
           ]
         },
         histogramData: {
-          columns: ['年龄', 'F1','F2','F3','F4','F5','F6','F7','F8','F9',],
+          columns: ['年龄', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9',],
           rows: [
-            {'年龄': '20-30', 'F1':662,'F2':574,'F3':795,'F4':677,'F5':821,'F6':736,'F7':310,'F8':659,'F9':845,},
-            {'年龄': '30-40', 'F1':459,'F2':514,'F3':411,'F4':501,'F5':936,'F6':527,'F7':749,'F8':260,'F9':858,},
-            {'年龄': '40-50', 'F1':180,'F2':944,'F3':325,'F4':934,'F5':177,'F6':502,'F7':844,'F8':477,'F9':944,},
-            {'年龄': '50-70', 'F1':135,'F2':807,'F3':707,'F4':264,'F5':600,'F6':183,'F7':605,'F8':308,'F9':646,},
-            {'年龄': '70+', 'F1':139,'F2':941,'F3':325,'F4':311,'F5':723,'F6':300,'F7':335,'F8':498,'F9':926,},
+            {
+              '年龄': '20-30',
+              'F1': 662,
+              'F2': 574,
+              'F3': 795,
+              'F4': 677,
+              'F5': 821,
+              'F6': 736,
+              'F7': 310,
+              'F8': 659,
+              'F9': 845,
+            },
+            {
+              '年龄': '30-40',
+              'F1': 459,
+              'F2': 514,
+              'F3': 411,
+              'F4': 501,
+              'F5': 936,
+              'F6': 527,
+              'F7': 749,
+              'F8': 260,
+              'F9': 858,
+            },
+            {
+              '年龄': '40-50',
+              'F1': 180,
+              'F2': 944,
+              'F3': 325,
+              'F4': 934,
+              'F5': 177,
+              'F6': 502,
+              'F7': 844,
+              'F8': 477,
+              'F9': 944,
+            },
+            {
+              '年龄': '50-70',
+              'F1': 135,
+              'F2': 807,
+              'F3': 707,
+              'F4': 264,
+              'F5': 600,
+              'F6': 183,
+              'F7': 605,
+              'F8': 308,
+              'F9': 646,
+            },
+            {
+              '年龄': '70+',
+              'F1': 39,
+              'F2': 11,
+              'F3': 20,
+              'F4': 15,
+              'F5': 19,
+              'F6': 7,
+              'F7': 8,
+              'F8': 2,
+              'F9': 13,
+            },
           ]
         },
         radarchartData: {
-          columns: ['类别', 'F1','F2','F3','F4','F5','F6','F7','F8','F9'],
+          columns: ['类别', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9'],
           rows: [
-            {'类别': '测试用户平均值','F1':1.24,'F2':2.23,'F3':1.71,'F4':2.02,'F5':0.25,'F6':0.31,'F7':4.26,'F8':2.78,'F9':0.87,},
-            {'类别': '常模', 'F1':1.37,'F2':1.62,'F3':1.65,'F4':1.50,'F5':1.39,'F6':1.48,'F7':1.23,'F8':1.43,'F9':1.29},
-            {'类别': '正常值', 'F1':2.54,'F2':1.53,'F3':4.37,'F4':3.98,'F5':4.99,'F6':2.49,'F7':3.71,'F8':3.45,'F9':1.79,},
+            // {'类别': '测试用户平均值','F1':1.24,'F2':2.23,'F3':1.71,'F4':2.02,'F5':0.25,'F6':0.31,'F7':4.26,'F8':2.78,'F9':0.87,},
+            // {
+            //   '类别': '常模',
+            //   'F1': 1.37,
+            //   'F2': 1.62,
+            //   'F3': 1.65,
+            //   'F4': 1.50,
+            //   'F5': 1.39,
+            //   'F6': 1.48,
+            //   'F7': 1.23,
+            //   'F8': 1.43,
+            //   'F9': 1.29
+            // },
+            // {'类别': '正常值', 'F1': 1, 'F2': 1, 'F3': 1, 'F4': 1, 'F5': 1, 'F6': 1, 'F7': 1, 'F8': 1, 'F9': 1,},
           ]
         },
         pieChartData: {
           columns: ['人群', '负面情绪倾向人数'],
           rows: [
-            {'人群': '男', '负面情绪倾向人数': 393},
-            {'人群': '女', '负面情绪倾向人数': 530},
-            {'人群': '已婚', '负面情绪倾向人数': 240},
-            {'人群': '未婚', '负面情绪倾向人数': 350},
+            // {'人群': '男', '负面情绪倾向人数': 393},
+            // {'人群': '女', '负面情绪倾向人数': 530},
+            // {'人群': '已婚', '负面情绪倾向人数': 240},
+            // {'人群': '未婚', '负面情绪倾向人数': 350},
           ]
         },
         heatMapChartData: {
@@ -247,7 +313,7 @@
       {
         // 表格数据：
         // 此处应该为全局数据。
-        getData() {
+        getData: function () {
           new Promise((resolve, reject) => {
             let tabledata = getScl90historyListWithUserData().then((res) => {
               return res.data
@@ -256,6 +322,133 @@
           }).then(res => {
             this.scl90history = res;
             this.listLoading = false;
+            // 雷达图变量
+            let somatization_avg = 0;
+            let obsessive_avg = 0;
+            let interpersonal_avg = 0;
+            let depression_avg = 0;
+            let anxiety_avg = 0;
+            let hostility_avg = 0;
+            let phobic_avg = 0;
+            let paranoid_avg = 0;
+            let psychoticism_avg = 0;
+
+            // 饼图变量
+            let male = 0;
+            let female = 0;
+            let marriaged = 0;
+            let unmamarriaged = 0;
+            // 环图变量
+            let salary_num_1 = 0, salary_num_2 = 0, salary_num_3 = 0, salary_num_4 = 0, salary_num_5 = 0,
+              salary_num_6 = 0, salary_num_7 = 0;
+            for (let data of res) {
+              // 雷达图
+              somatization_avg += parseInt(data.somatization);
+              obsessive_avg += parseInt(data.obsessive);
+              interpersonal_avg += parseInt(data.interpersonal);
+              depression_avg += parseInt(data.depression);
+              anxiety_avg += parseInt(data.anxiety);
+              hostility_avg +=parseInt(data.hostility);
+              phobic_avg += parseInt(data.phobic);
+              paranoid_avg += parseInt(data.paranoid);
+              psychoticism_avg += parseInt(data.psychoticism);
+
+              if (parseInt(data.sumscore) >= 160) {
+                // 饼图
+                parseInt(data.user.sex) === 1 ? male += 1 : female += 1;
+                parseInt(data.user.marriage) === 1 ? marriaged += 1 : unmamarriaged += 1;
+                // 环图
+                switch (parseInt(data.user.salary)) {
+                  case 1:
+                    salary_num_1 += 1;
+                    break;
+                  case 2:
+                    salary_num_2 += 1;
+                    break;
+                  case 3:
+                    salary_num_3 += 1;
+                    break;
+                  case 4:
+                    salary_num_4 += 1;
+                    break;
+                  case 5:
+                    salary_num_5 += 1;
+                    break;
+                  case 6:
+                    salary_num_6 += 1;
+                    break;
+                  case 7:
+                    salary_num_7 += 1;
+                    break;
+                }
+              }
+            }
+            somatization_avg = (somatization_avg / (12*res.length)).toFixed(2);
+            // console.log(somatization_avg);
+            obsessive_avg = (obsessive_avg / (10*res.length)).toFixed(2);
+            interpersonal_avg = (interpersonal_avg / (9*res.length)).toFixed(2);
+            depression_avg = (depression_avg / (13*res.length)).toFixed(2);
+            anxiety_avg = (anxiety_avg / (10*res.length)).toFixed(2);
+            hostility_avg = (hostility_avg / (6*res.length)).toFixed(2);
+            phobic_avg = (phobic_avg / (7*res.length)).toFixed(2);
+            paranoid_avg = (paranoid_avg / (6*res.length)).toFixed(2);
+            psychoticism_avg = (psychoticism_avg /(10*res.length)).toFixed(2);
+            let obj = [{
+              '类别': '测试用户平均值',
+              'F1': somatization_avg,
+              'F2': obsessive_avg,
+              'F3': interpersonal_avg,
+              'F4': depression_avg,
+              'F5': anxiety_avg,
+              'F6': hostility_avg,
+              'F7': phobic_avg,
+              'F8': paranoid_avg,
+              'F9': psychoticism_avg,
+            },{
+              '类别': '常模',
+              'F1': 1.37,
+              'F2': 1.62,
+              'F3': 1.65,
+              'F4': 1.50,
+              'F5': 1.39,
+              'F6': 1.48,
+              'F7': 1.23,
+              'F8': 1.43,
+              'F9': 1.29
+            },
+              {'类别': '正常值', 'F1': 1, 'F2': 1, 'F3': 1, 'F4': 1, 'F5': 1, 'F6': 1, 'F7': 1, 'F8': 1, 'F9': 1,},];
+            // console.log(obj[0]);
+            for(let i of obj){
+              this.radarchartData.rows.push(i);
+            }
+
+
+            // 饼图
+            let pieArray = [
+              {'人群': '男', '负面情绪倾向人数': male},
+              {'人群': '女', '负面情绪倾向人数': female},
+              {'人群': '已婚', '负面情绪倾向人数': marriaged},
+              {'人群': '未婚', '负面情绪倾向人数': unmamarriaged},
+            ];
+            for (let i of pieArray) {
+              this.pieChartData.rows.push(i);
+            }
+
+            // 环图
+            let ringArray = [
+              {'收入情况': '1000元以下', '人数': salary_num_1},
+              {'收入情况': '1000-1999元', '人数': salary_num_2},
+              {'收入情况': '2000-3999元', '人数': salary_num_3},
+              {'收入情况': '4000-5999元', '人数': salary_num_4},
+              {'收入情况': '6000-9999元', '人数': salary_num_5},
+              {'收入情况': '10000-19999元', '人数': salary_num_6},
+              {'收入情况': '200000元以上', '人数': salary_num_7}
+            ];
+            for (let i of ringArray) {
+              this.ringChartData.rows.push(i);
+            }
+
+
           });
         },
         // 带状态表格的行列标注：

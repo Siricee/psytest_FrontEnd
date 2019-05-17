@@ -466,6 +466,9 @@
         if (this.stress > 19 && this.depression >= 14 && this.anxiety >= 15) {
           str += '建议调整心态或咨询心理医生。'
         }
+        if(this.stress < 19 && this.depression < 14 && this.anxiety < 15){
+          str += '状态不错，请继续保持健康的心态！'
+        }
         return str;
       },
 

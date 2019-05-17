@@ -168,28 +168,28 @@
         ringChartData: {
           columns: ['收入情况', '人数'],
           rows: [
-            {'收入情况': '1000元以下', '人数': 1393},
-            {'收入情况': '1000-1999元', '人数': 3530},
-            {'收入情况': '2000-3999元', '人数': 2923},
-            {'收入情况': '4000-5999元', '人数': 1723},
-            {'收入情况': '6000-9999元', '人数': 3792},
-            {'收入情况': '10000-19999元', '人数': 4593}
+            // {'收入情况': '1000元以下', '人数': 1393},
+            // {'收入情况': '1000-1999元', '人数': 3530},
+            // {'收入情况': '2000-3999元', '人数': 2923},
+            // {'收入情况': '4000-5999元', '人数': 1723},
+            // {'收入情况': '6000-9999元', '人数': 3792},
+            // {'收入情况': '10000-19999元', '人数': 4593}
           ]
         },
         histogramData: {
           columns: ['年龄', '抑郁', '焦虑', '压力'],
           rows: [
-            {'年龄': '20-30', '抑郁': 1393, '焦虑': 1093, '压力': 1099},
-            {'年龄': '30-40', '抑郁': 3530, '焦虑': 3230, '压力': 2088},
-            {'年龄': '40-50', '抑郁': 2923, '焦虑': 2623, '压力': 2033},
-            {'年龄': '50-70', '抑郁': 1723, '焦虑': 1423, '压力': 1534},
-            {'年龄': '70+', '抑郁': 3792, '焦虑': 3492, '压力': 400},
+            // {'年龄': '20-30', '抑郁': 1393, '焦虑': 1093, '压力': 1099},
+            // {'年龄': '30-40', '抑郁': 3530, '焦虑': 3230, '压力': 2088},
+            // {'年龄': '40-50', '抑郁': 2923, '焦虑': 2623, '压力': 2033},
+            // {'年龄': '50-70', '抑郁': 1723, '焦虑': 1423, '压力': 1534},
+            // {'年龄': '70+', '抑郁': 3792, '焦虑': 3492, '压力': 400},
           ]
         },
         radarchartData: {
           columns: ['类别', '焦虑', '抑郁', '压力'],
           rows: [
-            {'类别': '测试用户平均值', '焦虑': 21.017, '抑郁': 21.380, '压力': 20.812},
+            // {'类别': '测试用户平均值', '焦虑': 21.017, '抑郁': 21.380, '压力': 20.812},
             {'类别': '常模', '焦虑': 12, '抑郁': 14, '压力': 13},
             {'类别': '正常值', '焦虑': 7, '抑郁': 9, '压力': 14},
           ]
@@ -197,10 +197,10 @@
         pieChartData: {
           columns: ['人群', '负面情绪倾向人数'],
           rows: [
-            {'人群': '男', '负面情绪倾向人数': 393},
-            {'人群': '女', '负面情绪倾向人数': 530},
-            {'人群': '已婚', '负面情绪倾向人数': 240},
-            {'人群': '未婚', '负面情绪倾向人数': 350},
+            // {'人群': '男', '负面情绪倾向人数': 393},
+            // {'人群': '女', '负面情绪倾向人数': 530},
+            // {'人群': '已婚', '负面情绪倾向人数': 240},
+            // {'人群': '未婚', '负面情绪倾向人数': 350},
           ]
         },
         heatMapChartData: {
@@ -233,6 +233,135 @@
           }).then(res => {
             this.dass21history = res;
             this.listLoading = false;
+
+            // 雷达图变量
+            let depression_avg = 0;
+            let anxiety_avg = 0;
+            let stress_avg = 0;
+            // 饼图变量
+            let male = 0;
+            let female = 0;
+            let marriaged = 0;
+            let unmamarriaged = 0;
+            // 环图变量
+            let salary_num_1 = 0, salary_num_2 = 0, salary_num_3 = 0, salary_num_4 = 0, salary_num_5 = 0,
+              salary_num_6 = 0, salary_num_7 = 0;
+            // 条形图变量
+            let depression_20_30 = 0;
+            let anxiety_20_30 = 0;
+            let stress_20_30 = 0;
+            let depression_30_40 = 0;
+            let anxiety_30_40 = 0;
+            let stress_30_40 = 0;
+            let depression_40_50 = 0;
+            let anxiety_40_50 = 0;
+            let stress_40_50 = 0;
+            let depression_50_70 = 0;
+            let stress_50_70 = 0;
+            let anxiety_50_70 = 0;
+            let depression_70more = 0;
+            let anxiety_70more = 0;
+            let stress_70more = 0;
+            for (let data of res) {
+              // 雷达图添加数据
+              depression_avg += parseInt(data.depression);
+              anxiety_avg += parseInt(data.anxiety);
+              stress_avg += parseInt(data.stress);
+              // 饼图添加数据
+              if (parseInt(data.depression) > 13 || parseInt(data.anxiety) > 9 || parseInt(data.stress) > 18) {
+                // 饼图
+                parseInt(data.user.sex) === 1 ? male += 1 : female += 1;
+                parseInt(data.user.marriage) === 1 ? marriaged += 1 : unmamarriaged += 1;
+                // 环图
+                switch (parseInt(data.user.salary)) {
+                  case 1:
+                    salary_num_1 += 1;
+                    break;
+                  case 2:
+                    salary_num_2 += 1;
+                    break;
+                  case 3:
+                    salary_num_3 += 1;
+                    break;
+                  case 4:
+                    salary_num_4 += 1;
+                    break;
+                  case 5:
+                    salary_num_5 += 1;
+                    break;
+                  case 6:
+                    salary_num_6 += 1;
+                    break;
+                  case 7:
+                    salary_num_7 += 1;
+                    break;
+                }
+
+                // 条形图
+                if (parseInt(data.user.age) >= 20 && parseInt(data.user.age) < 30) {
+                  parseInt(data.depression) > 13 ? depression_20_30 += 1 : depression_20_30 += 0;
+                  parseInt(data.anxiety) > 9 ? anxiety_20_30 += 1 : anxiety_20_30 += 0;
+                  parseInt(data.stress) > 18 ? stress_20_30 += 1 : stress_20_30 += 0;
+                } else if (parseInt(data.user.age) >= 30 && parseInt(data.user.age) < 40) {
+                  parseInt(data.depression) > 13 ? depression_30_40 += 1 : depression_30_40 += 0;
+                  parseInt(data.anxiety) > 9 ? anxiety_30_40 += 1 : anxiety_30_40 += 0;
+                  parseInt(data.stress) > 18 ? stress_30_40 += 1 : stress_30_40 += 0;
+                } else if (parseInt(data.user.age) >= 40 && parseInt(data.user.age) < 50) {
+                  parseInt(data.depression) > 13 ? depression_40_50 += 1 : depression_40_50 += 0;
+                  parseInt(data.anxiety) > 9 ? anxiety_40_50 += 1 : anxiety_40_50 += 0;
+                  parseInt(data.stress) > 18 ? stress_40_50 += 1 : stress_40_50 += 0;
+                } else if (parseInt(data.user.age) >= 50 && parseInt(data.user.age) < 70) {
+                  parseInt(data.depression) > 13 ? depression_50_70 += 1 : depression_50_70 += 0;
+                  parseInt(data.anxiety) > 9 ? anxiety_50_70 += 1 : anxiety_50_70 += 0;
+                  parseInt(data.stress) > 18 ? stress_50_70 += 1 : stress_50_70 += 0;
+                } else if (parseInt(data.user.age) >= 70) {
+                  parseInt(data.depression) > 13 ? depression_70more += 1 : depression_70more += 0;
+                  parseInt(data.anxiety) > 9 ? anxiety_70more += 1 : anxiety_70more += 0;
+                  parseInt(data.stress) > 18 ? stress_70more += 1 : stress_70more += 0;
+                }
+
+              }
+
+            }
+            // 雷达图
+            depression_avg = (depression_avg / res.length).toFixed(2);
+            anxiety_avg = (anxiety_avg / res.length).toFixed(2);
+            stress_avg = (stress_avg / res.length).toFixed(2);
+            let radarObj = {'类别': '测试用户平均值', '焦虑': anxiety_avg, '抑郁': depression_avg, '压力': stress_avg};
+            this.radarchartData.rows.push(radarObj);
+            // 饼图
+            let pieArray = [
+              {'人群': '男', '负面情绪倾向人数': male},
+              {'人群': '女', '负面情绪倾向人数': female},
+              {'人群': '已婚', '负面情绪倾向人数': marriaged},
+              {'人群': '未婚', '负面情绪倾向人数': unmamarriaged},
+            ];
+            for (let i of pieArray) {
+              this.pieChartData.rows.push(i);
+            }
+            // 环图
+            let ringArray = [
+              {'收入情况': '1000元以下', '人数': salary_num_1},
+              {'收入情况': '1000-1999元', '人数': salary_num_2},
+              {'收入情况': '2000-3999元', '人数': salary_num_3},
+              {'收入情况': '4000-5999元', '人数': salary_num_4},
+              {'收入情况': '6000-9999元', '人数': salary_num_5},
+              {'收入情况': '10000-19999元', '人数': salary_num_6},
+              {'收入情况': '200000元以上', '人数': salary_num_7}
+            ];
+            for (let i of ringArray) {
+              this.ringChartData.rows.push(i);
+            }
+            // 条形图
+            let histoArray = [{'年龄': '20-30', '抑郁': depression_20_30, '焦虑': anxiety_20_30, '压力': stress_20_30},
+              {'年龄': '30-40', '抑郁': depression_30_40, '焦虑': anxiety_30_40, '压力': stress_30_40},
+              {'年龄': '40-50', '抑郁': depression_40_50, '焦虑': anxiety_40_50, '压力': stress_40_50},
+              {'年龄': '50-70', '抑郁': depression_50_70, '焦虑': anxiety_50_70, '压力': stress_50_70},
+              {'年龄': '70+', '抑郁': depression_70more, '焦虑': anxiety_70more, '压力': stress_70more}];
+            for (let i of histoArray) {
+              this.histogramData.rows.push(i);
+            }
+
           });
         },
         // 带状态表格的行列标注：
