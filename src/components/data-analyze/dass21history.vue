@@ -10,7 +10,7 @@
       <el-row :gutter="10">
         <el-col :span="11">
           <el-card class="box-card" style="overflow:auto">
-            <el-table :data="dass21history" v-loading="listLoading" height="416" width="95%"
+            <el-table :data="dass21history" v-loading="listLoading" height="460" width="95%"
                       :summary-method="calculateAverage"
                       show-summary highlight-current-row
                       border :row-class-name="tableRowName">
@@ -482,11 +482,11 @@
     color: red;
   }
 
-
   .el-card {
     margin-bottom: 10px;
   }
-  .box-card .el-card__body{
-    min-height: 450px;
+  .dass21history .el-card__body{
+    min-height: 480px;
   }
+
 </style>
