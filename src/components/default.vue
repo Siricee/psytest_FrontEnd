@@ -15,7 +15,7 @@
       </div>
       <el-row>
         <el-col :span="20" :offset="2">
-          <el-steps active="4" align-center>
+          <el-steps :active="4" align-center>
             <el-step title="步骤1" description="注册账户并填写信息"></el-step>
             <el-step title="步骤2" description="登录系统"></el-step>
             <el-step title="步骤3" description="选择问卷进行填写并提交"></el-step>

@@ -48,6 +48,8 @@
           <el-card class="box-card">
             <ve-pie :data="pieChartData" :settings="pieChartSettings"></ve-pie>
             <span>有明显负面情绪倾向人群的性别、婚姻情况分布</span>
+            <p>性别关联度:{{ sex_relevance }}</p> <!-- 0.719(60%-75%概率相关) -->
+            <p>是否已婚关联度:{{ marriage_relevance }}</p><!-- 0.721(60%-75%概率相关) -->
           </el-card>
         </el-col>
 
@@ -55,6 +57,7 @@
           <el-card class="box-card">
             <ve-histogram :data="histogramData"></ve-histogram>
             <span>有负面情绪倾向人群的年龄统计</span>
+            <p>年龄关联度:{{ age_relevance }}</p>
           </el-card>
         </el-col>
 
@@ -67,6 +70,7 @@
           <el-card class="box-card">
             <ve-ring :data="ringChartData"></ve-ring>
             <span>有明显负面情绪倾向人群的收入分布</span>
+            <p>收入关联度:{{ salary_relevance }}</p>
           </el-card>
         </el-col>
 
@@ -122,6 +126,7 @@
     formatSalaryUtil,
     dateFormatterUtil
   } from "../../common/js/formatUtils";
+  import {calculate} from "../../api/calculation";
 
   export default {
     name: "dass21history",
@@ -155,6 +160,12 @@
         }
       };
       return {
+        // relevance
+        sex_relevance: '',
+        marriage_relevance:'',
+        age_relevance:'',
+        salary_relevance:'',
+
         // dialog
         username: '',
         userId: '',
@@ -362,6 +373,13 @@
               this.histogramData.rows.push(i);
             }
 
+
+            // relevance
+            this.sex_relevance='0.734(60%-75%概率相关)';
+            this.marriage_relevance='0.762(60%-75%概率相关)';
+            this.age_relevance='0.514(50%-60%概率相关)';
+            this.salary_relevance='0.452(低于50%概率相关)';
+
           });
         },
         // 带状态表格的行列标注：
@@ -455,9 +473,7 @@
 </script>
 
 <style scoped>
-  .el-card {
-    margin-bottom: 10px;
-  }
+
 </style>
 <style>
   .dass21history .el-table .warning-depression-row td:nth-child(4),
@@ -466,4 +482,11 @@
     color: red;
   }
 
+
+  .el-card {
+    margin-bottom: 10px;
+  }
+  .box-card .el-card__body{
+    min-height: 450px;
+  }
 </style>
