@@ -1,13 +1,12 @@
+<h1 align="center">心理测试及数据分析平台--前端部分</h1>
 
+<p align="center">
+<img alt="Author" src="https://img.shields.io/badge/Author-Sirice-blue.svg"/>
+<img alt="node.js" src="https://img.shields.io/badge/node.js-6.0%2B-43853d.svg?style=flat-square"/>
+<img alt="buildpass" src="https://img.shields.io/badge/build-passing-brightgreen.svg"/>
+<img alt="vue.js" src="https://img.shields.io/badge/framework-Vue.js-green.svg"/>
+</p>
 
-<center>
-
-## 心理测试及数据分析平台--前端部分
-![shield](https://img.shields.io/badge/build-passing-brightgreen.svg)
-![](https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg)
-![](https://img.shields.io/badge/framework-Vue.js-green.svg)
-
-</center>
 
 > 本项目为毕设自用。
 
