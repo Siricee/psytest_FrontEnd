@@ -1,4 +1,18 @@
-﻿使用：
+
+
+<center>
+
+## 心理测试及数据分析平台--前端部分
+![shield](https://img.shields.io/badge/build-passing-brightgreen.svg)
+![](https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg)
+![](https://img.shields.io/badge/framework-Vue.js-green.svg)
+
+</center>
+
+> 本项目为毕设自用。
+
+##### 使用
+
 ```bash
 cd folder
 
@@ -6,11 +20,6 @@ npm install
 
 npm run build
 ```
-
-# 本项目毕设自用。
-
-> A Vue.js project
-
 ##### 调试注意
 
 Chrome中`localhost:8081/api`报错404、500实际是8080端口错误信息。因为proxy已经全局代理了接口跨域。
