@@ -1,4 +1,13 @@
-﻿# 本项目毕设自用。
+﻿使用：
+```bash
+cd folder
+
+npm install
+
+npm run build
+```
+
+# 本项目毕设自用。
 
 > A Vue.js project
 
